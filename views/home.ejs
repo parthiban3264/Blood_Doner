@@ -1,0 +1,128 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/about">About</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/donor">Donor</a></li>
+                <li><a href="/receiver">Receiver</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>Welcome, <%= username %>!</h1>
+        <p>This is your home page. You can navigate through the menu to manage your profile, donate blood, or find a receiver.</p>
+    </div>
+    <div>
+        <section>
+            <h2>Our Impact</h2>
+            <p>💉 Total Donors: <%= totalDonors %></p>
+            <p>🚑 Blood Requests Fulfilled: <%= totalRequests %></p>
+        </section>
+        
+    </div>
+
+    <footer>
+        <p>&copy; Donor Care</p>
+    </footer>
+</body>
+</html> -->
+
+<!-- another -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Care Home</title>
+    <link rel="stylesheet" href="/home.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            <i class="fas fa-hand-holding-heart"></i> DonorCare
+        </div>
+        <ul id="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <!-- <li><a href="/donor">Donate Blood</a></li>
+            <li><a href="/receiver">Request Blood</a></li> -->
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- Welcome Section -->
+    <header>
+        <h1>WELCOME .<%= username %>!</h1>
+        <!-- <p>Your contribution can save lives. Become a donor today!</p> -->
+
+    </header>
+
+    <!-- Statistics Section -->
+    <section class="stats">
+        <div class="stat-box">
+            <h2>Total Donors</h2>
+            <p>
+                <%= totalDonors %>
+            </p>
+        </div>
+        <div class="stat-box">
+            <h2>Total Requests</h2>
+            <p>
+                <%= totalRequests %>
+            </p>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <a href="/donor" class="btn">💉 Become a Donor</a>
+        <a href="/receiver" class="btn">🚑 Request Blood</a>
+    </section>
+
+    <section>
+        <h2 class="tagline"><img src="/images/medical.png" alt=""> One drop can save a life!</h2>
+        <h2 class="tagline"><img src="/images/medical.png" alt="">One drop can a stop to death!</h2>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 DONOR CARE .</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.getElementById("menu-toggle");
+            const navLinks = document.getElementById("nav-links");
+
+            menuToggle.addEventListener("click", function () {
+                navLinks.classList.toggle("show"); // Show/hide menu on click
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

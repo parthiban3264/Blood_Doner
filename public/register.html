@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="register.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        .input-box {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>Register</h1>
+        <form id="registerForm" action="/register" method="POST" autocomplete="off">
+
+            <!-- Username -->
+            <div class="input-box">
+                <label>Username:</label>
+                <input type="text" id="username" name="username" required autocomplete="off">
+                <span class="error" id="usernameError"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="input-box">
+                <label>Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span class="error" id="emailError"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="input-box">
+                <label>Password:</label>
+                <input type="password" id="password" name="password" required autocomplete="new-password">
+                <span class="error" id="passwordError"></span>
+            </div>
+
+            <!-- Age -->
+            <div class="input-box">
+                <label>Age:</label>
+                <input type="number" id="age" name="age" required>
+                <span class="error" id="ageError"></span>
+            </div>
+
+            <!-- Phone -->
+            <div class="input-box">
+                <label>Phone:</label>
+                <input type="text" id="phone" name="phone" required>
+                <span class="error" id="phoneError"></span>
+            </div>
+
+            <!-- Gender -->
+            <div class="input-box">
+                <select name="gender" id="gender" onchange="updateProfileImage()">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="others">Others</option>
+                </select>
+                <span class="error" id="GenderError"></span>
+            </div>
+
+            <!-- Blood Group -->
+            <div class="input-box">
+                <label>Blood Group:</label>
+                <select id="blood_group" name="blood_group" required>
+                    <option value="">Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+                <span class="error" id="bloodGroupError"></span>
+            </div>
+
+            <!-- Weight -->
+            <div class="input-box">
+                <label>Weight (kg):</label>
+                <input type="number" id="weight" name="weight" required>
+                <span class="error" id="weightError"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Login Link -->
+        <p>Already have an account? <a href="/login">Login here</a></p>
+
+        <script>
+            document.getElementById('registerForm').addEventListener('submit', function (event) {
+                let isValid = true;
+
+                // Clear previous errors
+                document.querySelectorAll('.error').forEach(el => el.textContent = '');
+
+                // // Validate Email
+                // const email = document.getElementById('email').value;
+                // if (!email.match(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)) {
+                //     document.getElementById('emailError').textContent = 'Invalid email address';
+                //     isValid = false;
+                // }
+                document.getElementById('email').addEventListener('input', function () {
+                    const email = this.value.trim();
+                    const emailError = document.getElementById('emailError');
+
+                    emailError.textContent = '';
+
+                    if (!email.match(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)) {
+                        emailError.textContent = 'Invalid email format (must be @gmail.com)';
+                        emailError.style.color = 'red';
+                        return;
+                    }
+
+                    fetch(`/check-email?email=${encodeURIComponent(email)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.error) {
+                                emailError.textContent = data.error;
+                                emailError.style.color = 'red';
+                            } else {
+                                emailError.textContent = '✅ Email is available';
+                                emailError.style.color = 'green';
+                            }
+                        })
+                        .catch(error => {
+                            emailError.textContent = 'Server error. Try again.';
+                            emailError.style.color = 'red';
+                        });
+                });
+
+
+                // Validate Password
+                const password = document.getElementById('password').value;
+                if (password.length < 8) {
+                    document.getElementById('passwordError').textContent = 'Password must be at least 8 characters';
+                    isValid = false;
+                }
+
+                // Validate Username
+                const username = document.getElementById('username').value.trim();
+                if (username === '') {
+                    document.getElementById('usernameError').textContent = 'Username is required';
+                    isValid = false;
+                }
+
+                // Validate Age
+                const age = document.getElementById('age').value;
+                if (age < 18 || age > 65) {
+                    document.getElementById('ageError').textContent = 'Age must be between 18 and 65';
+                    isValid = false;
+                }
+
+                // Validate Phone Number
+                const phone = document.getElementById('phone').value;
+                if (!phone.match(/^\d{10}$/)) {
+                    document.getElementById('phoneError').textContent = 'Phone number must be 10 digits';
+                    isValid = false;
+                }
+
+                // Validate Blood Group
+                const bloodGroup = document.getElementById('blood_group').value;
+                if (!['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].includes(bloodGroup)) {
+                    document.getElementById('bloodGroupError').textContent = 'Invalid blood group';
+                    isValid = false;
+                }
+
+                // Validate gender
+                const gender = document.getElementById('gender').value;
+                if (!['male', 'female', 'others'].includes(gender)) {
+                    document.getElementById('GenderError').textContent = 'Invalid Gender';
+                    isValid = false;
+                }
+
+                // Validate Weight
+                const weight = document.getElementById('weight').value;
+                if (weight < 50) {
+                    document.getElementById('weightError').textContent = 'Weight must be at least 50kg';
+                    isValid = false;
+                }
+
+                // Prevent form submission if there are errors
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+            function updateProfileImage() {
+                var gender = document.getElementById("gender").value;
+                var profileImage = document.getElementById("profileImage");
+
+                if (gender === "male") {
+                    profileImage.src = "/images/menprofile.png";  // Set male profile picture
+                } else if (gender === "female") {
+                    profileImage.src = "/images/femaleprofile.jpg"; // Set female profile picture
+                } else {
+                    profileImage.src = "/images/default.jpg"; // Set default profile picture
+                }
+            }
+
+        </script>
+    </div>
+</body>
+
+</html>

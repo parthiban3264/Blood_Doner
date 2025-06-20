@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receiver</title>
+    <link rel="stylesheet" href="receiver.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-hand-holding-heart"></i> DonorCare
+            </div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/about">About</a></li>
+                <!-- <li><a href="/donor">Donor</a></li> -->
+                <!-- <li><a href="/receiver">Receiver</a></li> -->
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>Receiver Information</h1>
+
+        <!-- Blood Request Form -->
+        <div class="blood-request">
+            <h2>Request Blood</h2>
+            <form action="/request-blood" method="POST">
+                <label for="bloodGroup">Select Your Blood Group</label>
+                <select id="bloodGroup" name="bloodGroup" required>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+
+                <label for="doctor">Select Preferred Doctor</label>
+                <select id="doctor" name="doctor" required>
+                    <% doctors.forEach(doctor => { %>
+                        <option value="<%= doctor.id %>"><%= doctor.name %> - <%= doctor.specialty %></option>
+                    <% }) %>
+                </select>
+
+                <label for="appointmentDate">Preferred Appointment Date</label>
+                <input type="date" id="appointmentDate" name="appointmentDate" required>
+
+                <button type="submit" class="button">Request Blood</button>
+            </form>
+        </div>
+
+        <!-- Available Doctors -->
+        <div class="available-doctors">
+            <h2>Available Doctors</h2>
+            <ul>
+                <% doctors.forEach(doctor => { %>
+                    <li><%= doctor.name %> - <%= doctor.specialty %></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Blood Donation System</p>
+    </footer>
+</body>
+</html>

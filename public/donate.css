@@ -1,0 +1,139 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif; /* Use a clean and modern font */
+    background-color: #f4f4f9;     /* Light background color */
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #ff4d4d; /* Dark background for header */
+    color: white;            /* White text */
+    padding: 20px 0;         /* Padding for the header */
+    text-align: center;      /* Center the text */
+}
+
+footer {
+    background-color: #ff4d4d; /* Dark background for footer */
+    color: white;            /* White text */
+    text-align: center;      /* Center the text */
+    padding: 20px 0;         /* Padding for footer */
+    position: fixed;         /* Fixed position at the bottom */
+    bottom: 0;
+    width: 100%;
+}
+/* Styling for the Donation Form */
+form {
+    background-color: #fff;        /* White background */
+    padding: 30px;                 /* Padding inside the form */
+    max-width: 600px;              /* Maximum width of the form */
+    margin: 0 auto;                /* Center the form on the page */
+    border-radius: 10px;           /* Rounded corners */
+    box-shadow: 0 4px 8px #ff4d4d; /* Subtle shadow */
+}
+
+/* Input fields in the donation form */
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form textarea {
+    width: 100%;                  /* Make inputs take full width */
+    padding: 12px;                /* Padding inside inputs */
+    margin-bottom: 20px;          /* Space below each input */
+    border: 1px solid #ddd;       /* Border for inputs */
+    border-radius: 5px;           /* Rounded corners */
+    font-size: 16px;              /* Font size */
+    background-color: #f9f9f9;    /* Light grey background */
+}
+
+/* Button inside the donation form */
+form button {
+    background-color: #4CAF50;     /* Green background */
+    color: white;                  /* White text */
+    padding: 15px 30px;            /* Padding inside the button */
+    font-size: 18px;               /* Font size */
+    font-weight: bold;             /* Make text bold */
+    border: none;                  /* Remove default border */
+    border-radius: 5px;            /* Rounded corners */
+    cursor: pointer;              /* Change cursor to pointer */
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+/* Hover effect for the form button */
+form button:hover {
+    background-color: #45a049;     /* Darker green on hover */
+}
+
+/* Style for labels in the form */
+form label {
+    font-size: 16px;               /* Font size for labels */
+    font-weight: bold;             /* Bold text for labels */
+    margin-bottom: 5px;            /* Space between label and input */
+    display: block;                /* Display each label as a block element */
+}
+
+/* Margin around the form section */
+form section {
+    margin-bottom: 20px;           /* Space between sections */
+}
+/* public/css/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    text-align: center;
+    padding: 20px;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #2d6a4f;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-size: 16px;
+    color: #333;
+}
+
+input, select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #2d6a4f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1b4d3e;
+}
+
+a {
+    color: #1e3a8a;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

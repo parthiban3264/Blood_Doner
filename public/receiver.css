@@ -1,0 +1,257 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Header Navigation */
+/* Navbar Styles */
+nav {
+    background: #ff4d4d;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Logo */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: azure;
+}
+
+
+/* Navbar Links */
+nav ul {
+    list-style: none;
+    
+    margin-right: 18%;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+    padding-right: 8%;
+    
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1A1A40;
+    transition: color 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: BLACK;
+}
+
+/* Hamburger Menu (Hidden on Large Screens) */
+.menu-toggle {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: progress;
+    display: none;
+}
+img{
+    width: 3%;
+    height: 2%;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu-toggle {
+        display: block;
+        color: #00b609;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        background: white;
+        display: none; /* Initially Hidden */
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    nav ul.show {
+        display: flex; /* Show when active */
+    }
+}
+
+
+/* Content Wrapper */
+.content {
+    width: 90%;
+    max-width: 700px;
+    margin-top: 100px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Blood Request Form */
+.blood-request,
+.available-doctors {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.blood-request h2,
+.available-doctors h2 {
+    color: #ff4d4d;
+}
+
+.blood-request form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    animation: slideUp 1s ease-in-out;
+}
+
+.blood-request label {
+    font-weight: bold;
+    text-align: left;
+}
+
+.blood-request select,
+.blood-request input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.blood-request select:focus,
+.blood-request input:focus {
+    border-color: #0077b6;
+    box-shadow: 0px 0px 10px rgba(0, 119, 182, 0.3);
+}
+
+/* Button */
+.button {
+    display: inline-block;
+    background: #ff4d4d;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    border: none;
+}
+
+.button:hover {
+    background: #005f8a;
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(0, 119, 182, 0.3);
+}
+
+/* Available Doctors */
+.available-doctors ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.available-doctors li {
+    background: #e3f2fd;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.available-doctors li:hover {
+    background: #b3e0ff;
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    background: #ff4d4d;
+    color: white;
+    width: 100%;
+    
+    bottom: 0;
+    left: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    .button {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    .available-doctors li {
+        font-size: 16px;
+    }
+}

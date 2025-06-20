@@ -1,0 +1,147 @@
+<!-- forgot password -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="/forrepass.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Forgot Password</h2>
+        <form action="/forgot-password" method="post">
+            <label for="phone">Enter your phone number:</label>
+            <input type="text" name="phone" id="phone" placeholder="Phone Number" required>
+            <button type="submit">Send OTP</button>
+        </form>
+        <% if (message) { %>
+            <p class="message"><%= message %></p>
+        <% } %>
+    </div>
+</body>
+</html>
+
+<!-- reset-password -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="/forrepass.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Reset Password</h2>
+        <form action="/reset-password" method="post">
+            <label for="phone">Phone Number:</label>
+            <input type="text" name="phone" id="phone" placeholder="Phone Number" required>
+
+            <label for="otp">Enter OTP:</label>
+            <input type="text" name="otp" id="otp" placeholder="OTP" required>
+
+            <label for="newPassword">New Password:</label>
+            <input type="password" name="newPassword" id="newPassword" placeholder="New Password" required>
+
+            <button type="submit">Reset Password</button>
+        </form>
+        <% if (message) { %>
+            <p class="message"><%= message %></p>
+        <% } %>
+    </div>
+</body>
+</html>
+
+<!-- server code -->
+
+// Configure Nodemailer
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+// 1️⃣ **Request Password Reset**
+app.post("/forgot-password", (req, res) => {
+  const { email } = req.body;
+  if (!email) return res.status(400).send("Email is required");
+
+  const token = crypto.randomBytes(32).toString("hex");
+  const expiry = new Date(Date.now() + 3600000); // 1 hour expiration
+
+  db.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
+    if (err) return res.status(500).send("Server error");
+    if (result.length === 0) return res.status(404).send("Email not found");
+
+    // Store token in DB
+    db.query(
+      "UPDATE users SET reset_token = ?, reset_token_expiry = ? WHERE email = ?",
+      [token, expiry, email],
+      (err) => {
+        if (err) return res.status(500).send("Server error");
+
+        // Send email
+        const resetLink = `${process.env.BASE_URL}/reset-password/${token}`;
+        const mailOptions = {
+          from: process.env.EMAIL_USER,
+          to: email,
+          subject: "Password Reset Request",
+          html: `<p>You requested a password reset. Click <a href="${resetLink}">here</a> to reset your password. This link expires in 1 hour.</p>`,
+        };
+
+        transporter.sendMail(mailOptions, (error) => {
+          if (error) return res.status(500).send("Failed to send email");
+          res.send("Password reset email sent");
+        });
+      }
+    );
+  });
+});
+
+// 2️⃣ **Verify Reset Token**
+app.get("/reset-password/:token", (req, res) => {
+  const { token } = req.params;
+
+  db.query(
+    "SELECT * FROM users WHERE reset_token = ? AND reset_token_expiry > NOW()",
+    [token],
+    (err, result) => {
+      if (err) return res.status(500).send("Server error");
+      if (result.length === 0) return res.status(400).send("Invalid or expired token");
+
+      res.send("Valid token, show reset password form");
+    }
+  );
+});
+
+// 3️⃣ **Reset Password**
+app.post("/reset-password", (req, res) => {
+  const { token, newPassword } = req.body;
+
+  if (!token || !newPassword) return res.status(400).send("Invalid request");
+
+  db.query(
+    "SELECT * FROM users WHERE reset_token = ? AND reset_token_expiry > NOW()",
+    [token],
+    async (err, result) => {
+      if (err) return res.status(500).send("Server error");
+      if (result.length === 0) return res.status(400).send("Invalid or expired token");
+
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      db.query(
+        "UPDATE users SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE reset_token = ?",
+        [hashedPassword, token],
+        (err) => {
+          if (err) return res.status(500).send("Server error");
+          res.send("Password has been reset successfully");
+        }
+      );
+    }
+  );
+});

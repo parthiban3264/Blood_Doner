@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-hand-holding-heart"></i> DonorCare
+            </div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Profile Section -->
+    <div class="profile-container">
+        <!-- Left Side: Profile Picture & Personal Info -->
+        <div class="left-section">
+            <h2>PERSONAL INFORMATION</h2>
+            <div class="profile-pic">
+                <img src="<%= user.profile_image %>" alt="Profile Image" width="250">
+
+            </div>
+            <div class="personal-info">
+                <p><strong>Username:</strong>
+                    <%= user.username %>
+                </p>
+                <p><strong>Age:</strong>
+                    <%= user.age %>
+                </p>
+                <p><strong>Weight:</strong>
+                    <%= user.weight %> kg
+                </p>
+                <p><strong>gender:</strong>
+                    <%= user.gender %>
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Side: Contact Info & Bio -->
+        <div class="right-section">
+            <h2>CONTACT INFORMATION</h2>
+            <div class="contactinfor">
+                
+                    <p><strong>Email:</strong>
+                        <%= user.email %>
+                    </p>
+    
+                    <p><strong>Phone:</strong>
+                        <%= user.phone %>
+                    </p>
+                    <p><strong>Last Donated Date:</strong>
+                        <%= user.last_donation %>
+                    </p>
+
+
+                
+            </div>
+            <!-- <form action="/update-profile" method="POST" autocomplete="off"> -->
+            <!-- Update Profile Button -->
+            <button class="update-btn"><a href="/update-profile">Update Now</a></button>
+            <!-- </form> -->
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 DonorCare</p>
+    </footer>
+
+</body>
+
+</html>

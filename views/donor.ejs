@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor</title>
+    <link rel="stylesheet" href="donor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-hand-holding-heart"></i> DonorCare
+            </div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/about">About</a></li> 
+                <!-- <li><a href="/donor">Donor</a></li> -->
+                <!-- <li><a href="/receiver">Receiver</a></li> -->
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>DONOR INFORMATION</h1>
+
+        <!-- Eligibility Check -->
+        <div class="eligibility">
+            <h2>Eligibility for Blood Donation</h2>
+            <p><strong>Age:</strong> Must be between 18 and 65 years old.</p>
+            <p><strong>Weight:</strong> Must weigh at least 50 kg (110 lbs).</p>
+        </div>
+
+        <!-- User's Profile Information -->
+        <div class="profile-info">
+            <h2>Your Profile</h2>
+            <p><strong>Username:</strong> <%= user.username %></p>
+            <p><strong>Age:</strong> <%= user.age %> years</p>
+            <p><strong>Weight:</strong> <%= user.weight %> kg</p>
+            <p><strong>Blood Group:</strong> <%= user.blood_group %></p>
+
+            <!-- Eligibility Status -->
+            <div class="eligibility-status">
+                <h3>Eligibility Status</h3>
+                <p>
+                    <% if (user.age >= 18 && user.age <= 65 && user.weight >= 50) { %>
+                        You are eligible to donate blood!
+                    <% } else { %>
+                        You are not eligible to donate blood at this time.
+                    <% } %>
+                </p>
+            </div>
+        </div>
+
+        <!-- Donate Now Button (Only if eligible) -->
+        <div class="donate-button">
+            <% if (user.age >= 18 && user.age <= 65 && user.weight >= 50) { %>
+                <a href="/blood-donate" class="button">Donate Now</a>
+            <% } else { %>
+                <p>! You are not eligible to donate blood due to age or weight restrictions..</p>
+            <% } %>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 DonorCare</p>
+    </footer>
+</body>
+</html>

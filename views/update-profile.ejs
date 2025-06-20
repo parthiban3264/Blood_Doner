@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="/profile-upd.css">
+</head>
+<body>
+
+<div class="profile-container">
+    <h2>Update Profile</h2>
+    <form action="/update-profile" method="POST" enctype="multipart/form-data">
+        <label>Profile Picture:</label><br>
+        <input type="file" name="profile_pic" accept="image/*"><br><br>
+
+        <label>Username:</label>
+        <input type="text" name="username" value="<%= user.username %>"><br>
+        
+        <label>Phone:</label>
+        <input type="text" name="phone" value="<%= user.phone %>"><br>
+        
+        <label>Email:</label>
+        <input type="email" name="email" value="<%= user.email %>"><br>
+        
+        <label>Weight (kg):</label>
+        <input type="number" name="weight" value="<%= user.weight %>"><br>
+
+        <label>Last Donation Date:</label>
+        <input type="date" name="last_donation" value="<%= user.last_donation %>"><br>
+
+        <button type="submit">Save Changes</button>
+        <a href="/profile">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>

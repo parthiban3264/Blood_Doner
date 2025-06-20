@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+      <header>
+            <nav>
+                <nav>
+                    <div class="logo">
+                        <i class="fas fa-hand-holding-heart"></i> DonorCare
+                    </div>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/about">About</a></li>
+                    <!-- <li><a href="/donor">Donor</a></li>
+                    <li><a href="/receiver">Receiver</a></li> -->
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+    <main>
+
+        <h1>Contact Us</h1>
+        <!-- contact.ejs (or HTML if you aren't using EJS) -->
+        <form action="/contact" method="POST">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="<%= user ? user.username : '' %>" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= user ? user.email : '' %>" required>
+            </div>
+            <div>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <div>
+                <button type="submit">Send Message</button>
+            </div>
+        </form>
+
+    </main>
+</body>
+<footer>
+    <p>© 2025 DonorCare</p>
+</footer>
+
+</html>

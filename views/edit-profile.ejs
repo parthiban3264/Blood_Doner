@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/edit-pro.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Edit Profile</h2>
+    <form action="/updateProfile" method="POST" enctype="multipart/form-data">
+        <br>
+
+        <label for="profile_pic">Profile Picture:</label>
+        <input type="file" name="profile_pic" id="profile_pic">
+
+        <br>
+
+        <% if (user.profile_pic) { %>
+            <p>Current Profile Picture:</p>
+            <img src="/uploads/<%= user.profile_pic %>" alt="Profile Picture" width="100">
+            <% } %>
+
+                <br>
+
+                <button type="submit">Update Profile</button>
+    </form>
+
+</body>
+
+</html>

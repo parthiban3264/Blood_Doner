@@ -1,0 +1,43 @@
+<!-- views/blood-donate.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation</title>
+    <link rel="stylesheet" href="/donate.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Donate Blood</h1>
+        <form action="/donation" method="POST">
+            <div>
+                <label for="bloodGroup">Blood Group:</label>
+                <select id="bloodGroup" name="bloodGroup" required>
+                    <option value="A+" <%= user.blood_group === 'A+' ? 'selected' : '' %>>A+</option>
+                    <option value="A-" <%= user.blood_group === 'A-' ? 'selected' : '' %>>A-</option>
+                    <option value="B+" <%= user.blood_group === 'B+' ? 'selected' : '' %>>B+</option>
+                    <option value="B-" <%= user.blood_group === 'B-' ? 'selected' : '' %>>B-</option>
+                    <option value="AB+" <%= user.blood_group === 'AB+' ? 'selected' : '' %>>AB+</option>
+                    <option value="AB-" <%= user.blood_group === 'AB-' ? 'selected' : '' %>>AB-</option>
+                    <option value="O+" <%= user.blood_group === 'O+' ? 'selected' : '' %>>O+</option>
+                    <option value="O-" <%= user.blood_group === 'O-' ? 'selected' : '' %>>O-</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" required min="50" value="<%= user.weight %>">
+            </div>
+
+            <div>
+                <label for="age">Age (years):</label>
+                <input type="number" id="age" name="age" required min="18" max="65" value="<%= user.age %>">
+            </div>
+
+            <button type="submit">Donate Blood</button>
+        </form>
+        <p><a href="/">Go back to Home</a></p>
+    </div>
+</body>
+</html>
